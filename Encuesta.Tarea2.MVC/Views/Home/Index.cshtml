@@ -4,8 +4,26 @@
 
 <main>
     <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Encuesta</h2>
+        <section class="col-md-8">
+            <button id="btnAgregar" class="btn btn-primary">Agregar</button>
+            <h2>Resumen de la Encuesta</h2>
+            <table id="gridResultados" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Destino</th>
+                        <th>Clasificación (%)</th>
+                        <th>Diferencia (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Se llena por JS -->
+                </tbody>
+            </table>
         </section>
     </div>
 </main>
+
+@section scripts {
+    <script src="~/Scripts/Encuesta.js"></script>
+}
