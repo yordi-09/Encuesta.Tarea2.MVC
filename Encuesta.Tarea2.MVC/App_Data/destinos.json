@@ -1,4 +1,26 @@
 [
-  { "nombre": "Par�s", "votos": 10 },
-  { "nombre": "Tokio", "votos": 8 }
+  {
+    "Nombre": "París",
+    "Votos": 10.0
+  },
+  {
+    "Nombre": "Tokio",
+    "Votos": 8.5
+  },
+  {
+    "Nombre": "Barcelona",
+    "Votos": 1.0
+  },
+  {
+    "Nombre": "San José",
+    "Votos": 1.5
+  },
+  {
+    "Nombre": "Ámsterdam",
+    "Votos": 1.0
+  },
+  {
+    "Nombre": "Estambul",
+    "Votos": 0.5
+  }
 ]

@@ -3,6 +3,6 @@
     public class DestinoViewModel
     {
         public string Nombre { get; set; }
-        public int Votos { get; set; }
+        public double Votos { get; set; }
     }
 }
