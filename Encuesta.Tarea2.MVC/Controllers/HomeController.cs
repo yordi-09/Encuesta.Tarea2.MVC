@@ -9,7 +9,7 @@ namespace Encuesta.Tarea2.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private string ElArchivoJsonConDestinos => Server.MapPath("~/App_Data/destinos.json");
+        private string RutaArchivoJsonConDestinos => Server.MapPath("~/App_Data/destinos.json");
 
         public ActionResult Index()
         {
@@ -19,21 +19,21 @@ namespace Encuesta.Tarea2.MVC.Controllers
         [HttpGet]
         public JsonResult ObtenerResultados()
         {
-            List<DestinoViewModel> destinos = LeerDestinos();
-            double totalVotos = destinos.Sum(d => d.Votos);
-            List<ResultadoViewModel> resultados = destinos
+            List<DestinoViewModel> losDestinos = LeerDestinos();
+
+            double totalVotos = losDestinos.Sum(d => d.Votos);
+
+            List<ResultadoViewModel> resultados = losDestinos
                 // Filtrar destinos en orden descendente
-                .OrderByDescending(d => d.Votos)
+                .OrderByDescending(elDestino => elDestino.Votos)
                 // Tomar los 20 primeros
                 .Take(20)
-                .Select((d, i) => new ResultadoViewModel
+                .Select((elDestino, i) => new ResultadoViewModel
                 {
                     Posicion = i + 1,
-                    Nombre = d.Nombre,
-                    // Debe calcular el porcentaje en el índice que alcanza cada destino de viaje
-                    // tomando la cantidad individual de cada destino, dividirlo entre la sumatoria
-                    // de todos los destinos y multiplicarlo por cien.
-                    Clasificacion = totalVotos > 0 ? Math.Round((double)d.Votos * 100 / totalVotos, 2) : 0,
+                    Nombre = elDestino.Nombre,
+                    // Calculo de la clasificación como porcentaje de los votos totales
+                    Clasificacion = totalVotos > 0 ? Math.Round((double)elDestino.Votos * 100 / totalVotos, 2) : 0,
                     Diferencia = 0.0
                 })
                 .ToList();
@@ -90,13 +90,17 @@ namespace Encuesta.Tarea2.MVC.Controllers
             if (Session["Destinos"] != null)
                 return (List<DestinoViewModel>)Session["Destinos"];
 
-            if (!System.IO.File.Exists(ElArchivoJsonConDestinos))
+            if (!System.IO.File.Exists(RutaArchivoJsonConDestinos))
                 return new List<DestinoViewModel>();
 
-            var elJson = System.IO.File.ReadAllText(ElArchivoJsonConDestinos);
-            var destinos = JsonConvert.DeserializeObject<List<DestinoViewModel>>(elJson) ?? new List<DestinoViewModel>();
-            Session["Destinos"] = destinos;
-            return destinos;
+            string losDestinosComoJson = System.IO.File.ReadAllText(RutaArchivoJsonConDestinos);
+
+            List<DestinoViewModel> losDestinos;
+            losDestinos = JsonConvert.DeserializeObject<List<DestinoViewModel>>(losDestinosComoJson) ?? new List<DestinoViewModel>();
+            
+            Session["Destinos"] = losDestinos;
+            
+            return losDestinos;
         }
 
         private void SumarDestino(List<DestinoViewModel> destinos, string nombre, double cantidad)
@@ -112,7 +116,7 @@ namespace Encuesta.Tarea2.MVC.Controllers
         private void GuardarDestinos(List<DestinoViewModel> destinos)
         {
             string json = JsonConvert.SerializeObject(destinos, Formatting.Indented);
-            System.IO.File.WriteAllText(ElArchivoJsonConDestinos, json);
+            System.IO.File.WriteAllText(RutaArchivoJsonConDestinos, json);
         }
     }
 }

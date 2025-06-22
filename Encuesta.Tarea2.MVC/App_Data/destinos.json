@@ -22,5 +22,13 @@
   {
     "Nombre": "Estambul",
     "Votos": 0.5
+  },
+  {
+    "Nombre": "Viena",
+    "Votos": 1.0
+  },
+  {
+    "Nombre": "Río de Janeiro",
+    "Votos": 0.5
   }
 ]
