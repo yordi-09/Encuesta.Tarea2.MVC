@@ -1,0 +1,34 @@
+[
+  {
+    "Nombre": "París",
+    "Votos": 10.0
+  },
+  {
+    "Nombre": "Tokio",
+    "Votos": 8.5
+  },
+  {
+    "Nombre": "Barcelona",
+    "Votos": 1.0
+  },
+  {
+    "Nombre": "San José",
+    "Votos": 1.5
+  },
+  {
+    "Nombre": "Ámsterdam",
+    "Votos": 1.0
+  },
+  {
+    "Nombre": "Estambul",
+    "Votos": 0.5
+  },
+  {
+    "Nombre": "Viena",
+    "Votos": 1.0
+  },
+  {
+    "Nombre": "Río de Janeiro",
+    "Votos": 0.5
+  }
+]
